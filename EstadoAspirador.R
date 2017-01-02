@@ -9,6 +9,7 @@ Aspirador <- function(desc = NULL, pai = NULL){
   assign("posicao", posicao, envir = e) ##mostra qual quadrado do cenario eh
   assign("desc", desc, envir = e) ##sera o número de quadrados sujos no estado
   assign("pai", pai, envir = e)
+  assign("status", status, envir = e) ##se o estado atual eh sujo ou nao
   assign("g", 0, envir = e) ##inicializa com zero
   assign("h", Inf, envir = e) ##inicializa com valor invalido = infinito
   assign("f", Inf, envir = e) ##inicializa com valor invalido = infinito
@@ -45,3 +46,50 @@ heuristica.Aspirador <- function(atual){
   }
 }
 
+teste.Aspirador <- function(obj) { ##obj para obter a posicao atual e atual para obter o cenario atual
+  filhos <- list()
+  
+  if (obj$posicao == 1){ ##se estou na posicao 1
+    switch(obj$pai, 
+           NULL={ ##eh o estado inicial, nao tem estado pai 
+             ##operacao "direita"
+             filho <- Aspirador(desc = obj$desc, pai = obj$posicao)
+             filho$posicao <- (obj$posicao + 1)
+             filho$g <- 1
+             filho$h <- heuristica(filho)
+             filhos <- c(filhos, list(filho))
+             ##operacao "baixo"
+             filho <- Aspirador(desc = obj$desc, pai = obj$posicao)
+             filho$posicao <- (obj$posicao + 2)
+             filho$g <- 3
+             filho$h <- heuristica(filho)
+             filhos <- c(filhos, list(filho))					
+           },
+           2={ ##se veio da direita (2) então não pode voltar para la, nao gera este estado
+             ##operacao "baixo"
+             filho <- Aspirador(desc = obj$desc, pai = obj$posicao)
+             filho$posicao <- (obj$posicao + 2)
+             filho$g <- 3
+             filho$h <- heuristica(filho)
+             filhos <- c(filhos, list(filho))					
+           },
+           3={ ##se veio de baixo (3) entao nao pode voltar, nao gera este estado
+             ##operacao "direita"
+             filho <- Aspirador(desc = obj$desc, pai = obj$posicao)
+             filho$posicao <- (obj$posicao + 1)
+             filho$g <- 1
+             filho$h <- heuristica(filho)
+             filhos <- c(filhos, list(filho))				
+           }
+    )	
+    if (obj$status == 1) {##se o quadrado esta sujo oferece o estado alcancado pela operacao limpar
+      ##operacao "limpar"
+      filho <- Aspirador(desc = (obj$desc - 1), pai = obj$posicao)
+      filho$posicao <- obj$posicao
+      filho$g <- 2
+      filho$h <- heuristica(filho)
+      filhos <- c(filhos, list(filho))
+    }
+  }
+  return(filhos)
+}
