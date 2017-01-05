@@ -2,13 +2,13 @@ source("Estado.R")
 
 ## Classe e metodos para o problema do Aspirador de po 
 
-Aspirador <- function(desc = NULL, pai = NULL){
+Aspirador <- function(desc = NULL, pai = 0){
   
   e <- environment() ##ambiente
   
   assign("posicao", 0, envir = e) ##mostra qual quadrado do cenario eh
   assign("desc", 0, envir = e) ##sera o número de quadrados sujos no estado
-  assign("pai", NULL, envir = e)
+  assign("pai", 0, envir = e)
   assign("contexto", 0, envir = e) ##contexto atual para descobrir se o estado atual eh sujo ou nao
   assign("g", 0, envir = e) ##inicializa com zero
   assign("h", Inf, envir = e) ##inicializa com valor invalido = infinito
@@ -47,51 +47,188 @@ heuristica.Aspirador <- function(atual){
 }
 
 geraFilhos.Aspirador <- function(obj, contexto) { ##obj para obter a posicao atual e atual para obter o cenario atual
-  pai <- obj$pai
-  filhos <- list()
-  
-  if (obj$posicao == 1){ ##se estou na posicao 1
-    switch(obj$pai, 
-           NULL={ ##eh o estado inicial, nao tem estado pai 
-             ##operacao "direita"
-             filho <- Aspirador(desc = obj$desc, pai = obj$posicao)
-             filho$posicao <- (obj$posicao + 1)
-             filho$g <- 1
-             filho$h <- heuristica(filho)
-             filhos <- c(filhos, list(filho))
-             ##operacao "baixo"
-             filho <- Aspirador(desc = obj$desc, pai = obj$posicao)
-             filho$posicao <- (obj$posicao + 2)
-             filho$g <- 3
-             filho$h <- heuristica(filho)
-             filhos <- c(filhos, list(filho))					
-           },
-           '2'={ ##se veio da direita (2) então não pode voltar para la, nao gera este estado
-             ##operacao "baixo"
-             filho <- Aspirador(desc = obj$desc, pai = obj$posicao)
-             filho$posicao <- (obj$posicao + 2)
-             filho$g <- 3
-             filho$h <- heuristica(filho)
-             filhos <- c(filhos, list(filho))					
-           },
-           '3'={ ##se veio de baixo (3) entao nao pode voltar, nao gera este estado
-             ##operacao "direita"
-             filho <- Aspirador(desc = obj$desc, pai = obj$posicao)
-             filho$posicao <- (obj$posicao + 1)
-             filho$g <- 1
-             filho$h <- heuristica(filho)
-             filhos <- c(filhos, list(filho))				
-           }
-    )	
+	filhos <- list()
+	if (obj$posicao == 1){ ##se estou na posicao 1
+		if (obj$pai == 0){
+			##eh o estado inicial, nao tem estado pai 
+            ##operacao "direita"
+            filho <- Aspirador()
+            filho$posicao <- (obj$posicao + 1)
+			filho$desc <- obj$desc
+			filho$pai <- obj$posicao
+            filho$g <- obj$posicao
+            filho$h <- heuristica(filho)
+            filhos <- c(filhos, list(filho))
+            ##operacao "baixo"
+            filho <- Aspirador()
+            filho$posicao <- (obj$posicao + 2)
+			filho$desc <- obj$desc
+			filho$pai <- obj$posicao
+            filho$g <- 3
+            filho$h <- heuristica(filho)
+            filhos <- c(filhos, list(filho))
+        }
+		else if(obj$pai == 2){ 
+			##se veio da direita (2) então não pode voltar para la, nao gera este estado
+            ##operacao "baixo"
+            filho <- Aspirador()
+            filho$posicao <- (obj$posicao + 2)
+			filho$desc <- obj$desc
+			filho$pai <- obj$posicao
+            filho$g <- 3
+            filho$h <- heuristica(filho)
+            filhos <- c(filhos, list(filho))					
+		}
+		else{
+            ##se veio de baixo (3) entao nao pode voltar, nao gera este estado
+            ##operacao "direita"
+            filho <- Aspirador()
+            filho$posicao <- (obj$posicao + 1)
+			filho$desc <- obj$desc
+			filho$pai <- obj$posicao			
+            filho$g <- 1
+            filho$h <- heuristica(filho)
+            filhos <- c(filhos, list(filho))				
+        }
+	}
+	if (obj$posicao == 2){ ##se estou na posicao 2
+		if (obj$pai == 0){
+			##eh o estado inicial, nao tem estado pai 
+            ##operacao "esquerda"
+            filho <- Aspirador()
+            filho$posicao <- (obj$posicao - 1)
+			filho$desc <- obj$desc
+			filho$pai <- obj$posicao
+            filho$g <- obj$posicao
+            filho$h <- heuristica(filho)
+            filhos <- c(filhos, list(filho))
+            ##operacao "baixo"
+            filho <- Aspirador()
+            filho$posicao <- (obj$posicao + 2)
+			filho$desc <- obj$desc
+			filho$pai <- obj$posicao
+            filho$g <- 3
+            filho$h <- heuristica(filho)
+            filhos <- c(filhos, list(filho))
+        }
+		else if(obj$pai == 1){ 
+			##se veio da esquerda (1) então não pode voltar para la, nao gera este estado
+            ##operacao "baixo"
+            filho <- Aspirador()
+            filho$posicao <- (obj$posicao + 2)
+			filho$desc <- obj$desc
+			filho$pai <- obj$posicao
+            filho$g <- 3
+            filho$h <- heuristica(filho)
+            filhos <- c(filhos, list(filho))					
+		}
+		else{
+            ##se veio de baixo (4) entao nao pode voltar, nao gera este estado
+            ##operacao "esquerda"
+            filho <- Aspirador()
+            filho$posicao <- (obj$posicao - 1)
+			filho$desc <- obj$desc
+			filho$pai <- obj$posicao			
+            filho$g <- 1
+            filho$h <- heuristica(filho)
+            filhos <- c(filhos, list(filho))				
+        }
+	}
+	if (obj$posicao == 3){ ##se estou na posicao 3
+		if (obj$pai == 0){
+			##eh o estado inicial, nao tem estado pai 
+            ##operacao "direita"
+            filho <- Aspirador()
+            filho$posicao <- (obj$posicao + 1)
+			filho$desc <- obj$desc
+			filho$pai <- obj$posicao
+            filho$g <- obj$posicao
+            filho$h <- heuristica(filho)
+            filhos <- c(filhos, list(filho))
+            ##operacao "cima"
+            filho <- Aspirador()
+            filho$posicao <- (obj$posicao - 2)
+			filho$desc <- obj$desc
+			filho$pai <- obj$posicao
+            filho$g <- 3
+            filho$h <- heuristica(filho)
+            filhos <- c(filhos, list(filho))
+        }
+		else if(obj$pai == 4){ 
+			##se veio da direita (4) então não pode voltar para la, nao gera este estado
+            ##operacao "cima"
+            filho <- Aspirador()
+            filho$posicao <- (obj$posicao - 2)
+			filho$desc <- obj$desc
+			filho$pai <- obj$posicao
+            filho$g <- 3
+            filho$h <- heuristica(filho)
+            filhos <- c(filhos, list(filho))					
+		}
+		else{
+            ##se veio de cima (1) entao nao pode voltar, nao gera este estado
+            ##operacao "direita"
+            filho <- Aspirador()
+            filho$posicao <- (obj$posicao + 1)
+			filho$desc <- obj$desc
+			filho$pai <- obj$posicao			
+            filho$g <- 1
+            filho$h <- heuristica(filho)
+            filhos <- c(filhos, list(filho))				
+        }
+	}	
+	if (obj$posicao == 4){ ##se estou na posicao 4
+		if (obj$pai == 0){
+			##eh o estado inicial, nao tem estado pai 
+            ##operacao "esquerda"
+            filho <- Aspirador()
+            filho$posicao <- (obj$posicao - 1)
+			filho$desc <- obj$desc
+			filho$pai <- obj$posicao
+            filho$g <- obj$posicao
+            filho$h <- heuristica(filho)
+            filhos <- c(filhos, list(filho))
+            ##operacao "cima"
+            filho <- Aspirador()
+            filho$posicao <- (obj$posicao - 2)
+			filho$desc <- obj$desc
+			filho$pai <- obj$posicao
+            filho$g <- 3
+            filho$h <- heuristica(filho)
+            filhos <- c(filhos, list(filho))
+        }
+		else if(obj$pai == 3){ 
+			##se veio da esquerda (3) então não pode voltar para la, nao gera este estado
+            ##operacao "cima"
+            filho <- Aspirador()
+            filho$posicao <- (obj$posicao - 2)
+			filho$desc <- obj$desc
+			filho$pai <- obj$posicao
+            filho$g <- 3
+            filho$h <- heuristica(filho)
+            filhos <- c(filhos, list(filho))					
+		}
+		else{
+            ##se veio de cima (2) entao nao pode voltar, nao gera este estado
+            ##operacao "esquerda"
+            filho <- Aspirador()
+            filho$posicao <- (obj$posicao - 1)
+			filho$desc <- obj$desc
+			filho$pai <- obj$posicao			
+            filho$g <- 1
+            filho$h <- heuristica(filho)
+            filhos <- c(filhos, list(filho))				
+        }
+	}	
     if (contexto[obj$posicao] == 1) {##se o quadrado esta sujo oferece o estado alcancado pela operacao limpar
-      ##operacao "limpar"
-      filho <- Aspirador(desc = (obj$desc - 1), pai = obj$posicao)
-      filho$posicao <- obj$posicao
-      filho$g <- 2
-      filho$h <- heuristica(filho)
-      filhos <- c(filhos, list(filho))
+		##operacao "limpar"
+		filho <- Aspirador()
+		filho$posicao <- obj$posicao
+		filho$desc <- obj$desc - 1
+		filho$pai <- obj$pai
+		filho$g <- (obj$g + 2)
+		filho$h <- heuristica(filho)
+		filhos <- c(filhos, list(filho))
     }
-  }
-  return(filhos)
+	return(filhos)
 }
-
