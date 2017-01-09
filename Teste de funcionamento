@@ -1,0 +1,17 @@
+source("EstadoAspirador.R")
+
+contexto <- c(1,1,0,1)
+
+pai <- Aspirador()
+pai$posicao <- 1 
+
+inicial <- Aspirador(pai = NULL)
+inicial$posicao <- 2
+
+inicial$pai <- pai
+
+
+print.Aspirador(inicial)
+
+
+geraFilhos.Aspirador(inicial, contexto)
