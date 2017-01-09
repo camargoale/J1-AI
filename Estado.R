@@ -3,7 +3,7 @@ Estado <- function(desc=NULL){
   e <- environment()
   
   assign("desc", desc, envir = e)
-  assign("pai", 0, envir = e)
+  assign("pai", pai, envir = e)
   assign("g", 0, envir = e)
   assign("h", Inf, envir = e)
   assign("f", Inf, envir = e)
