@@ -1,17 +1,21 @@
 source("EstadoAspirador.R")
+source("BuscaDesinformadaAspirador.R")
 
 contexto <- c(1,1,0,1)
 
 pai <- Aspirador()
 pai$posicao <- 1 
 
-inicial <- Aspirador(pai = NULL)
+inicial <- Aspirador(pai = pai)
 inicial$posicao <- 2
 
-inicial$pai <- pai
+##inicial$pai <- pai
 
 
-print.Aspirador(inicial)
+inicial2 <- Aspirador(pai = inicial)
+inicial2$posicao <- 4
+
+recuperaCaminho(inicial2)
 
 
-geraFilhos.Aspirador(inicial, contexto)
+
