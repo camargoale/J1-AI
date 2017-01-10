@@ -1,0 +1,45 @@
+
+buscaEmLargura <- function(inicial, objetivo){
+  
+  abertos <- list(inicial)
+  fechados <- list()
+
+  while(length(abertos) != 0){
+    atual <- abertos[[1]]
+    abertos <- abertos[-1]
+    if(atual == objetivo){
+      return(recuperaCaminho(atual))
+    }else {
+      filhos <- geraFilhos(atual)
+      fechados <- c(fechados, atual)
+      filhos <- removeRepetidos(filhos, c(abertos, fechados))
+      abertos <- c(abertos, filhos) ## filhos têm prioridade menor! 
+    }
+  }
+  return("Busca falhou! :'-(")
+}
+
+recuperaCaminho <- function(atual){
+  
+  caminho <- list()
+  
+  while(!is.null(atual)){
+    caminho <- c(caminho, atual)
+    atual <- atual$pai
+  }
+  
+  return(rev(caminho))
+}
+
+removeRepetidos <- function(filhos, gerados){
+  
+  ## pega descrições dos estados já gerados
+  gDesc <- lapply(gerados, function(gerado) gerado$desc)
+  
+  ## verifica se filhos não aparece em estados gerados
+  fNovos <- sapply(filhos, function(filho) !is.element(list(filho$desc), gDesc))
+  
+  filhos <- filhos[fNovos]
+  
+  return(filhos)
+}
