@@ -47,7 +47,7 @@ heuristica.Aspirador <- function(atual){
   }
 }
 
-geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posicao atual e atual para obter o cenario atual
+geraFilhos.Aspirador <- function(obj) { ##obj para obter a posicao atual e atual para obter o cenario atual
   filhos <- list()
   if (obj$posicao == 1){ ##se estou na posicao 1
     if (is.null(obj$pai)){
@@ -57,7 +57,7 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
       filho$posicao <- (obj$posicao + 1)
       filho$desc <- obj$desc
       filho$pai <- obj
-      filho$contexto <- contextoAtual
+      filho$contexto <- obj$contexto
       filho$g <- obj$posicao
       filho$h <- heuristica(filho)
       filhos <- c(filhos, list(filho))
@@ -66,7 +66,7 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
       filho$posicao <- (obj$posicao + 2)
       filho$desc <- obj$desc
       filho$pai <- obj
-      filho$contexto <- contextoAtual
+      filho$contexto <- obj$contexto
       filho$g <- 3
       filho$h <- heuristica(filho)
       filhos <- c(filhos, list(filho))
@@ -78,7 +78,7 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
       filho$posicao <- (obj$posicao + 2)
       filho$desc <- obj$desc
       filho$pai <- obj
-      filho$contexto <- contextoAtual
+      filho$contexto <- obj$contexto
       filho$g <- 3
       filho$h <- heuristica(filho)
       filhos <- c(filhos, list(filho))					
@@ -90,7 +90,7 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
       filho$posicao <- (obj$posicao + 1)
       filho$desc <- obj$desc
       filho$pai <- obj	
-      filho$contexto <- contextoAtual
+      filho$contexto <- obj$contexto
       filho$g <- 1
       filho$h <- heuristica(filho)
       filhos <- c(filhos, list(filho))				
@@ -104,7 +104,7 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
       filho$posicao <- (obj$posicao - 1)
       filho$desc <- obj$desc
       filho$pai <- obj
-      filho$contexto <- contextoAtual
+      filho$contexto <- obj$contexto
       filho$g <- obj$posicao
       filho$h <- heuristica(filho)
       filhos <- c(filhos, list(filho))
@@ -113,7 +113,7 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
       filho$posicao <- (obj$posicao + 2)
       filho$desc <- obj$desc
       filho$pai <- obj
-      filho$contexto <- contextoAtual
+      filho$contexto <- obj$contexto
       filho$g <- 3
       filho$h <- heuristica(filho)
       filhos <- c(filhos, list(filho))
@@ -125,7 +125,7 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
       filho$posicao <- (obj$posicao + 2)
       filho$desc <- obj$desc
       filho$pai <- obj
-      filho$contexto <- contextoAtual
+      filho$contexto <- obj$contexto
       filho$g <- 3
       filho$h <- heuristica(filho)
       filhos <- c(filhos, list(filho))					
@@ -137,7 +137,7 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
       filho$posicao <- (obj$posicao - 1)
       filho$desc <- obj$desc
       filho$pai <- obj	
-      filho$contexto <- contextoAtual
+      filho$contexto <- obj$contexto
       filho$g <- 1
       filho$h <- heuristica(filho)
       filhos <- c(filhos, list(filho))				
@@ -151,7 +151,7 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
       filho$posicao <- (obj$posicao + 1)
       filho$desc <- obj$desc
       filho$pai <- obj
-      filho$contexto <- contextoAtual
+      filho$contexto <- obj$contexto
       filho$g <- obj$posicao
       filho$h <- heuristica(filho)
       filhos <- c(filhos, list(filho))
@@ -160,7 +160,7 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
       filho$posicao <- (obj$posicao - 2)
       filho$desc <- obj$desc
       filho$pai <- obj
-      filho$contexto <- contextoAtual
+      filho$contexto <- obj$contexto
       filho$g <- 3
       filho$h <- heuristica(filho)
       filhos <- c(filhos, list(filho))
@@ -172,7 +172,7 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
       filho$posicao <- (obj$posicao - 2)
       filho$desc <- obj$desc
       filho$pai <- obj
-      filho$contexto <- contextoAtual
+      filho$contexto <- obj$contexto
       filho$g <- 3
       filho$h <- heuristica(filho)
       filhos <- c(filhos, list(filho))					
@@ -184,7 +184,7 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
       filho$posicao <- (obj$posicao + 1)
       filho$desc <- obj$desc
       filho$pai <- obj
-      filho$contexto <- contextoAtual
+      filho$contexto <- obj$contexto
       filho$g <- 1
       filho$h <- heuristica(filho)
       filhos <- c(filhos, list(filho))				
@@ -198,7 +198,7 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
       filho$posicao <- (obj$posicao - 1)
       filho$desc <- obj$desc
       filho$pai <- obj
-      filho$contexto <- contextoAtual
+      filho$contexto <- obj$contexto
       filho$g <- obj$posicao
       filho$h <- heuristica(filho)
       filhos <- c(filhos, list(filho))
@@ -207,7 +207,7 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
       filho$posicao <- (obj$posicao - 2)
       filho$desc <- obj$desc
       filho$pai <- obj
-      filho$contexto <- contextoAtual
+      filho$contexto <- obj$contexto
       filho$g <- 3
       filho$h <- heuristica(filho)
       filhos <- c(filhos, list(filho))
@@ -219,7 +219,7 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
       filho$posicao <- (obj$posicao - 2)
       filho$desc <- obj$desc
       filho$pai <- obj
-      filho$contexto <- contextoAtual
+      filho$contexto <- obj$contexto
       filho$g <- 3
       filho$h <- heuristica(filho)
       filhos <- c(filhos, list(filho))					
@@ -231,19 +231,19 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
       filho$posicao <- (obj$posicao - 1)
       filho$desc <- obj$desc
       filho$pai <- obj
-      filho$contexto <- contextoAtual
+      filho$contexto <- obj$contexto
       filho$g <- 1
       filho$h <- heuristica(filho)
       filhos <- c(filhos, list(filho))				
     }
   }	
-  if (contexto[obj$posicao] == 1) {##se o quadrado esta sujo oferece o estado alcancado pela operacao limpar
+  if (obj$contexto[obj$posicao] == 1) {##se o quadrado esta sujo oferece o estado alcancado pela operacao limpar
     ##operacao "limpar"
     filho <- Aspirador()
     filho$posicao <- obj$posicao
     filho$desc <- obj$desc - 1
     filho$pai <- obj$pai
-    filho$contexto <- contextoAtual
+    filho$contexto <- obj$contexto
     filho$contexto[obj$posicao] <- 0
     filho$g <- (obj$g + 2)
     filho$h <- heuristica(filho)
