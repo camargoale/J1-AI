@@ -3,7 +3,7 @@ Estado <- function(desc=NULL){
   e <- environment()
   
   assign("desc", desc, envir = e)
-  assign("pai", pai, envir = e)
+  assign("pai", NULL, envir = e)
   assign("g", 0, envir = e)
   assign("h", Inf, envir = e)
   assign("f", Inf, envir = e)
@@ -48,4 +48,3 @@ geraFilhos.default <- function(obj, ...) {
   print("Funcao Generica. Defina a geração de filhos para o seu problema!\n")
   return(NULL)
 }
-
