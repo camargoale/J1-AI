@@ -1,36 +1,35 @@
 source("EstadoAspirador.R")
 source("BuscaDesinformadaAspirador.R")
 
-contexto <- c(1,1,1,1)
+contexto <- c(0,1,1,1)
 
 teste1 <- Aspirador()
 teste1$posicao <- 1
-teste1$desc <- 4
+teste1$desc <- 3
 
 print.Aspirador(teste1)
 
 geraFilhos.Aspirador(teste1, contexto)
 
+teste2 <- Aspirador()
+teste2$posicao <- 2
+teste2.pai <- Aspirador()
+teste2.pai$posicao <- 1
+teste2.avo <-Aspirador()
+teste2.avo$posicao <- 3
+teste2$pai <- teste2.pai
+teste2.pai$pai <- teste2.avo
+
+recuperaCaminho(teste2)
+
+contexto <- c(0,1,1,0)
+
+estado1Busca <- Aspirador()
+estado1Busca$posicao <- 1
+estado1Busca$desc <- 2
+estado1Busca$contexto <- contexto
+
+buscaEmLargura(estado1Busca)
 
 
 
-
-
-
-
-
-
-pai <- Aspirador()
-pai$posicao <- 1 
-
-inicial <- Aspirador(pai = pai)
-inicial$posicao <- 2
-
-##inicial$pai <- pai
-
-geraFilhos(inicial)
-
-inicial2 <- Aspirador(pai = inicial)
-inicial2$posicao <- 4
-
-recuperaCaminho(inicial2)
