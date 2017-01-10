@@ -239,12 +239,12 @@ geraFilhos.Aspirador <- function(obj, contextoAtual) { ##obj para obter a posica
   }	
   if (contexto[obj$posicao] == 1) {##se o quadrado esta sujo oferece o estado alcancado pela operacao limpar
     ##operacao "limpar"
-    filho$contexto <- contextoAtual
-    filho$contexto[obj$posicao] <- 0
     filho <- Aspirador()
     filho$posicao <- obj$posicao
     filho$desc <- obj$desc - 1
     filho$pai <- obj$pai
+    filho$contexto <- contextoAtual
+    filho$contexto[obj$posicao] <- 0
     filho$g <- (obj$g + 2)
     filho$h <- heuristica(filho)
     filhos <- c(filhos, list(filho))
