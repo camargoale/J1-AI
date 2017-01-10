@@ -1,18 +1,17 @@
-
-buscaEmLargura <- function(inicial, objetivo){
+buscaEmLargura <- function(inicial){
   
   abertos <- list(inicial)
   fechados <- list()
-
+  
   while(length(abertos) != 0){
     atual <- abertos[[1]]
     abertos <- abertos[-1]
-    if(atual == objetivo){
+    if(atual$desc == 0){
       return(recuperaCaminho(atual))
     }else {
       filhos <- geraFilhos(atual)
       fechados <- c(fechados, atual)
-      filhos <- removeRepetidos(filhos, c(abertos, fechados))
+      ##filhos <- removeRepetidos(filhos, c(abertos, fechados))
       abertos <- c(abertos, filhos) ## filhos têm prioridade menor! 
     }
   }
