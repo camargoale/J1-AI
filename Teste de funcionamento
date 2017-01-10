@@ -22,11 +22,11 @@ teste2.pai$pai <- teste2.avo
 
 recuperaCaminho(teste2)
 
-contexto <- c(0,1,1,0)
+contexto <- c(0,1,0,1)
 
 estado1Busca <- Aspirador()
 estado1Busca$posicao <- 1
-estado1Busca$desc <- 2
+estado1Busca$desc <- 3
 estado1Busca$contexto <- contexto
 
 buscaEmLargura(estado1Busca)
