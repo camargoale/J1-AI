@@ -18,6 +18,49 @@ buscaEmLargura <- function(inicial){
   return("Busca falhou! :'-(")
 }
 
+
+buscaEmProfundidade <- function(inicial, objetivo){
+  
+  abertos <- list(inicial)
+  fechados <- list()
+  
+  while(length(abertos) != 0){
+    atual <- abertos[[1]]
+    abertos <- abertos[-1]
+    if(atual == objetivo){
+      return(recuperaCaminho(atual))
+    }else {
+      filhos <- geraFilhos(atual)
+      fechados <- c(fechados, atual)
+      filhos <- removeRepetidos(filhos, c(abertos, fechados))
+      abertos <- c(filhos, abertos) ## filhos têm prioridade maior!
+    }
+  }
+  return("Busca falhou! :'-(")
+}
+
+buscaCustoUniforme <- function(inicial, objetivo){
+  
+  abertos <- list(inicial)
+  fechados <- list()
+  
+  while(length(abertos) != 0){
+    atual <- abertos[[1]]
+    abertos <- abertos[-1]
+    if(atual == objetivo){
+      return(recuperaCaminho(atual))
+    }else {
+      filhos <- geraFilhos(atual)
+      fechados <- c(fechados, atual)
+      filhosNovos <- removeRepetidos(filhos, c(abertos, fechados)) 
+      ## se gera filhos que aparecem em abertos, atualiza o valor de custo
+      ## abertos devem estar ordenados por menor custo
+      abertos <- ordenaPorCusto(c(atualizaAbertos(abertos, filhos),filhosNovos))
+    }
+  }
+  return("Busca falhou! :'-(")
+}
+
 recuperaCaminho <- function(atual){
   
   caminho <- list()
